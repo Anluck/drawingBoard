@@ -1,19 +1,61 @@
 var yyy = document.getElementById('yyy')
 var context = yyy.getContext('2d')
+var lineWidth = 3
 
 autoSetCanvasSize(yyy)
 
 listenToUser(yyy)
 
 var eraserEnabled = false
+pen.onclick = function () {
+  eraserEnabled = false
+  changClass(pen, eraser)
+}
 eraser.onclick = function () {
   eraserEnabled = true
-  actions.className = 'actions x'
+  changClass(eraser, pen)
 }
-brush.onclick = function () {
-  eraserEnabled = false
-  actions.className = 'actions'
+clear.onclick = function(){
+  context.clearRect(0, 0, yyy.width, yyy.height); 
 }
+save.onclick = function(){
+  yyy.style = "background: #fff;"
+  var url = yyy.toDataURL("image/png")
+  var a = document.createElement('a')
+  document.body.appendChild(a)
+  a.href = url
+  a.download = '我是乱画的_' + (new Date()).getTime()
+  a.target = '_blank'
+  a.click()
+}
+thin.onclick = function(){
+  lineWidth = 3
+  changClass(thin, thick)
+}
+thick.onclick = function(){
+  lineWidth = 6
+  changClass(thick, thin)
+}
+
+black.onclick = function(){
+  changeColor('black', black, red, orange, blue, green, purple)
+}
+red.onclick = function(){
+  changeColor('red', red, black, orange, blue, green, purple)
+}
+orange.onclick = function(){
+  changeColor('orange', orange, black, red, blue, green, purple)
+}
+blue.onclick = function(){
+  changeColor('blue', blue, black, red, orange, green, purple)
+}
+green.onclick = function(){
+  changeColor('green', green, black, red, orange, blue, purple)
+}
+purple.onclick = function(){
+  changeColor('purple', purple, black, red, orange, blue, green)
+}
+
 
 /*****************************/
 function autoSetCanvasSize(canvas) {
@@ -32,16 +74,14 @@ function autoSetCanvasSize(canvas) {
 
 function drawCircle(x, y, radius) {
   context.beginPath()
-  context.fillStyle = 'black'
   context.arc(x, y, radius, 0, Math.PI * 2);
   context.fill()
 }
 
 function drawLine(x1, y1, x2, y2) {
   context.beginPath();
-  context.strokeStyle = 'black'
   context.moveTo(x1, y1) // 起点
-  context.lineWidth = 5
+  context.lineWidth = lineWidth
   context.lineTo(x2, y2) // 终点
   context.stroke()
   context.closePath()
@@ -129,4 +169,19 @@ function listenToUser(canvas) {
       using = false
     }
   }
+}
+
+function changClass(classA, classB){
+  classA.classList.add('active')
+  classB.classList.remove('active')
+}
+function changeColor(color, a, b, c, d, e, f){
+  context.fillStyle = color
+	context.strokeStyle = color
+	a.classList.add('active')
+	b.classList.remove('active')
+	c.classList.remove('active')
+	d.classList.remove('active')
+	e.classList.remove('active')
+	f.classList.remove('active')
 }

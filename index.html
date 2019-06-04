@@ -11,9 +11,33 @@
 <body>
   <canvas id="yyy" width="300px" height="300px"></canvas>
   <div id="actions" class="actions">
-    <button id="eraser">橡皮擦</button>
-    <button id="brush">画笔</button>
+    <svg class="icon active" id="pen">
+      <use xlink:href="#icon-pen"></use>
+    </svg>
+    <svg class="icon" id="eraser">
+      <use xlink:href="#icon-eraser"></use>
+    </svg>
+    <svg class="icon" id="clear">
+      <use xlink:href="#icon-shanchu"></use>
+    </svg>
+    <svg class="icon" id="save">
+      <use xlink:href="#icon-xiazai"></use>
+    </svg>
   </div>
+  <ol class="colors">
+		<li id="black" class="active black"></li>
+		<li id="red" class="red"></li>
+		<li id="blue" class="blue"></li>
+		<li id="green" class="green"></li>
+    <li id="purple" class="purple"></li>
+    <li id="orange" class="orange"></li>
+  </ol>
+  <ol class="size">
+    <li class="thin active" id="thin">细笔</li>
+    <li class="thick" id="thick">粗笔</li>
+  </ol>
   <script src="./main.js"></script>
+  <script src="//at.alicdn.com/t/font_1228337_gy4pxbwn076.js"></script>
 </body>
+
 </html>
